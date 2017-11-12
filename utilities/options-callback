@@ -1,0 +1,7 @@
+if (typeof options === 'function') {
+    callback = options;
+    options = {};
+}
+//else
+options = options || {};
+ 
