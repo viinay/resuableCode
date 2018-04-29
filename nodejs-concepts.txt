@@ -1,4 +1,4 @@
 /* remove reference from object*/
 
-var a = Object.assign({}, b);
+var a = Object.assign({}, b); //ES6 feature and currently not available in all browsers
 
