@@ -1,0 +1,38 @@
+/*Object-mutable*/
+let a = {
+    foo: 'bar'
+};
+
+let b = a;
+
+a.foo = 'test';
+
+console.log(b.foo); // test
+console.log(a === b) // true
+
+/*string-immutable*/
+let a = 'test';
+let b = a;
+a = a.substring(2);
+
+console.log(a) //st
+console.log(b) //test
+console.log(a === b) //false
+
+/*array-mutable*/
+let a = ['foo', 'bar'];
+let b = a;
+
+a.push('baz')
+
+console.log(b); // ['foo', 'bar', 'baz']
+console.log(a === b) // true
+
+/*number-immutable*/
+let a = 1;
+let b = a;
+a++;
+
+console.log(a) //2
+console.log(b) //1
+console.log(a === b) //false
