@@ -3,3 +3,13 @@ function getCookieValue(e) {
 }
 
 getCookieValue(cookieName)
+
+
+
+//------------------------------//
+
+/*set cookie*/
+var myDate = new Date();
+myDate.setMonth(myDate.getMonth() + 12);
+
+document.cookie = '_fb_emailid=viinay.mengu@gmail.com;expires=myDate;domain=.example.com;path=/';
