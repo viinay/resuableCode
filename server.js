@@ -10,6 +10,7 @@ app.listen(port,function(){
 
 app.use(bodyParser.json())
 app.use(urlendoded)
+app.use("/public", express.static(__dirname+"/public"));
 
 app.get('/',function(req,res){
 	console.log('server set up is ready')
