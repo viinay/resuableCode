@@ -4,6 +4,11 @@ var mailDetails = {
   pass:'pass'
 }
 
+var pingCustomSMTPConfig = function(mailDetails){
+	  var customsmtpClient = mailjs['custom'](mailDetails); 
+	  return customsmtpClient.testConnection()
+};
+
 var getTransporterConfig = function(mailDetails){
     var SMTP_CONFIGS = [ 
         {port:587,secure:false,requireTLS:true,auth:{},tls:{rejectUnauthorized:false}},
@@ -26,13 +31,20 @@ var getTransporterConfig = function(mailDetails){
                     return {status:false ,error:error.message};
                 })
         })).then(function(results) {
-            for(var a=0;a<results.length;a++){
-                if(results[a].status){
-                    return resolve(SMTP_CONFIGS[a]);
-                    break;
-                }
-            };
-            return reject(results[0].error)
+            var validConfigs=[];
+            var error = [];
+            results.forEach(function(x,index){
+              if(x){
+                validConfigs.push(SMTP_CONFIGS[index])
+              }else{
+                error.push(x.error);
+              }
+            })
+            if(!!validConfigs[0]){
+              return resolve(validConfigs[0])
+            }else{
+              return reject(error)
+            }
         }).catch(function(error){
             return reject(error)
         })
