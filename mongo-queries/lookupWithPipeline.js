@@ -1,0 +1,17 @@
+db.getCollection('campaigns').aggregate([
+    {
+        "$match":{"email_id":"demousertest0@gmail.com"}
+    },
+    {
+        "$lookup":{
+            "from":"campaignitems",
+            "let":{"campaignId":"$_id"},
+            "pipeline":[
+                {
+                    "$match":{$expr:{$eq:["$$campaignId","$campaign_id"]}}
+                }
+            ],
+            "as":"campaignItems"
+        }
+    }
+])
