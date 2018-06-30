@@ -1,0 +1,26 @@
+server {
+        listen 80;
+        server_name IP_ADDRESS;
+        return 301 http://YOUR.DOMAIN;
+}
+
+server {
+    listen 80;
+    server_name _;
+    return 404;
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/test.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name test.com www.test.com;
+
+        location / {
+                proxy_pass       http://localhost:8000;
+                #try_files $uri $uri/ =404;
+        }
+}
