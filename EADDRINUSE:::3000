@@ -1,4 +1,5 @@
 sudo netstat -lp | grep 3000
+sudo kill -9 <PID>
 
 #windows
 #run>cmd
