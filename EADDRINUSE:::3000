@@ -1,1 +1,5 @@
 sudo netstat -lp | grep 3000
+
+#windows
+#run>cmd
+taskkill /f /im node.exe
