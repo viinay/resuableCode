@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        Servername vinay.com
+        DocumentRoot F:/projects/vinay
+        <Directory F:/projects/vinay>
+                DirectoryIndex index.html
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+                Require all granted
+        </Directory>
+</VirtualHost>
