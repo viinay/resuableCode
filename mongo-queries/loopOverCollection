@@ -1,0 +1,3 @@
+db.getCollection('mailstacks').find({"sendAt":{$type:"string"}}).forEach(function(elem){
+    db.getCollection('mailstacks').update({"_id":elem._id},{$set:{"sendAt":new Date(elem.sendAt)}})
+})
