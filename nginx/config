@@ -1,0 +1,78 @@
+server {
+    listen 80;
+    return 301 https://$host$request_uri;
+}
+
+
+server {
+    listen 443 ssl;
+    server_name www.qwenchjuice.com;
+    return 301 https://qwenchjuice.com$request_uri;
+    ssl_certificate /etc/letsencrypt/live/www.qwenchjuice.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.qwenchjuice.com/privkey.pem; # managed by Certbot
+
+}
+
+server {
+
+    listen 80;
+    server_name qwenchjuice.com www.qwenchjuice.com 
+    return 301 $scheme://qwenchjuice.com$request_uri;	
+    
+    gzip on;
+    gzip_min_length 1000;
+    gzip_proxied expired no-cache no-store private auth;
+    gzip_types text/plain application/xml;
+   
+    access_log /var/log/nginx/ghostssl.access.log;
+    #error_page 500 502 503 504 /504.html;
+
+    
+    location / {
+        #root /var/www/html/test/;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 90;
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    location /blog {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://127.0.0.1:3001;
+        proxy_read_timeout 90;
+    }
+    location /content {
+	root /var/www/html/qwench-live/ghost;
+		
+    }
+
+
+
+
+    listen 443 ssl; # managed by Certbot
+	ssl_certificate /etc/letsencrypt/live/qwenchjuice.com/fullchain.pem; # managed by Certbot
+    	ssl_certificate_key /etc/letsencrypt/live/qwenchjuice.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+
+    if ($scheme != "https") {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    # Redirect non-https traffic to https
+    # if ($scheme != "https") {
+    #     return 301 https://$host$request_uri;
+    # } # managed by Certbot
+
+
+}
