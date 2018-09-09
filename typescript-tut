@@ -12,7 +12,112 @@ let strArr:Array<string>;
 let numArr:Array<number>;
 let boolArr:Array<boolean>;
 
+var strNumTuple:[string,number]
+
+strNumTuple = ['hello',4]
+
+let myVoid:void = undefined //null
+let myNull:null = null
+let myUndefined:undefined = undefined
+
+
 #install node typings for Console constructure,as when --lib is used Node projects can opt out of the ambient DOM typings.console is global 
 #in browser but not in nodejs.
 
 npm install @types/node
+
+
+-----------------------------functions and interfaces
+function getSum(num1:number,num2:number):number{
+    return num1+num2;
+}
+
+console.log(getSum(1,2))
+
+let mySum = function(num1:any,num2:any):number{
+    if(typeof num1 == 'string'){
+        num1 = parseInt(num1)
+    }
+    if(typeof num1 == 'string'){
+        num1 = parseInt(num1)
+    }
+    return num1+num2;
+}
+
+console.log(mySum('1',2))
+
+interface Todo{
+    title:string,
+    text:string
+}
+
+// function showTodo(todo:{title:string,text:string}){
+function showTodo(todo:Todo){
+    console.log(todo.title+':'+todo.text)
+}
+let myTodo = {title:'Trash',text:'Take out trash'}
+
+showTodo(myTodo)
+
+
+----------------------------------------------
+
+interface UserInterface{
+    name:string;
+    email:string;
+    age:number;
+    register():void;
+    payInvoice():void;
+    adfas():void;
+}
+
+class User{ //class with static typing
+    private name:string;
+    private email:string;
+    public age:number;
+    /*
+    access modifiers:
+        protected => can only be accessible within class and its subclasses
+        private => can only be accessible within class
+        public => can accessible anywhere(inside class,outside class,subclasses)
+    */
+    constructor(name:string,email:string,age:number){
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+
+    private register(){
+        console.log(this.name+' is now registered')
+    }
+
+    public payInvoice(){
+        console.log(this.name+' had paid invoice')
+    }
+}
+
+//let john = new User('jhon','john@gmail.com',34)
+//console.log(john.register()) //cannot access outside class as it has private access 
+
+class Member extends User{
+    id:number;
+
+    constructor(id:number,name:string,email:string,age:number){
+        super(name,email,age)
+        this.id = id;
+    }
+
+    payInvoice(){
+        super.payInvoice()
+    }
+
+    payInvoice2(){
+        console.log('test')
+    }
+
+}
+
+let mike:Member = new Member(1,'Jhon','jhon@gmail.com',34)
+mike.payInvoice2()
+
+----------------------------------
