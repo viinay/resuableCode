@@ -1,0 +1,18 @@
+let myString:string;
+let myNumber:number;
+let myBoolean:boolean;
+let myVar:any;
+
+
+let strArr:string[];
+let numArr:number[];
+let boolArr:boolean[];
+
+let strArr:Array<string>;
+let numArr:Array<number>;
+let boolArr:Array<boolean>;
+
+#install node typings for Console constructure,as when --lib is used Node projects can opt out of the ambient DOM typings.console is global 
+#in browser but not in nodejs.
+
+npm install @types/node
