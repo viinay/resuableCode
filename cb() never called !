@@ -1,0 +1,62 @@
+See https://github.com/npm/npm/issues/16861
+
+This worked for me:
+npm cache verify
+
+Then I re-ran:
+npm install -g create-react-app
+
+And it installed like as expected: Issue resolved
+
+Some other solutions mentioned are:
+
+npm cache clean --force
+
+OR
+
+Deleting npm and npm-cache folders in Users%username%\AppData\Roaming (windows 7) and running npm install
+
+OR
+
+Update npm by via npm i -g npm
+
+OR
+
+Delete package-lock.json
+
+OR
+
+npm cache verify
+
+OR
+
+npm cache clean
+
+OR
+
+do these steps to fix the problem:
+
+find all outdated packages and update theme:
+npm outdated -g
+sudo npm i -g outDatedPKG
+upgrade npm to lateste version with:
+sudo npm i -g npm
+delete package-lock.json file.
+delete _cacache directory in ~/.npm: npm cache verify
+every time i get that error, do steps 2 & 3.
+if you still get the error, clear npm's cache:
+npm cache clean --force
+OR
+
+add proxy to .npmrc in ~ directory:
+proxy=http://localhost:8123
+https-proxy=http://localhost:8123
+
+try again! slow internet connection and censorship may cause this ugly problem.
+OR
+
+npm cache clear --force && npm install --no-shrinkwrap --update-binary
+
+OR
+
+npm config set package-lock false
