@@ -1,0 +1,3 @@
+ sudo certbot renew --nginx
+ 
+ kill the process by running:  sudo fuser -k 80/tcp
