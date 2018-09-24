@@ -1,0 +1,3 @@
+git pull origin branchname --allow-unrelated-histories
+
+#--allow-unrelated-histories when you have diff remote and local repo structure
