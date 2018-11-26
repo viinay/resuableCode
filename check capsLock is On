@@ -1,0 +1,20 @@
+You can use a KeyboardEvent to detect numerous keys including the caps lock on most recent browsers.
+
+The getModifierState function will provide the state for:
+
+Alt
+AltGraph
+CapsLock
+Control
+Fn (Android)
+Meta
+NumLock
+OS (Windows & Linux)
+ScrollLock
+Shift
+This demo works in all major browsers including mobile (caniuse).
+
+document.addEventListener( 'keydown', function( event ) {
+  var caps = event.getModifierState && event.getModifierState( 'CapsLock' );
+  console.log( caps ); // true when you press the keyboard CapsLock key
+});
