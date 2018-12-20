@@ -1,3 +1,20 @@
 db.getCollection('mailstacks').find({"sendAt":{$type:"string"}}).forEach(function(elem){
     db.getCollection('mailstacks').update({"_id":elem._id},{$set:{"sendAt":new Date(elem.sendAt)}})
 })
+
+
+
+db.getCollection('campaign').find({})
+    .forEach(function(doc) { 
+        let change = false;
+        if(typeof doc.startDate === 'string ){
+            doc.startDate=ISODate(doc.startDate);
+            change = true;
+        }
+        if(typeof doc.endDate === 'string ){
+            doc.endDate=ISODate(doc.endDate);
+            change = true;
+        }
+
+        if(change) db.getCollection('campaign').save(doc); 
+    })
