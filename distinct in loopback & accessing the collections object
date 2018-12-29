@@ -1,0 +1,22 @@
+/* var PublisherCollection = Publisher.app.models.publisher.getDataSource().connector.collection(Publisher.app.models.publisher.modelName);
+    PublisherCollection.distinct('hosts',function(error,hosts){
+      if(error){
+        return cb(error)
+      }else{
+        return cb(null,hosts)
+      }
+    }) */
+
+    let NewKafka = Publisher.app.models.new_kafka;
+    NewKafka.getDataSource().connector.connect(function(err, db) {
+      var collection = db.collection(`publisher_hosts`);
+      
+      collection.distinct("host",function(error,hosts){
+        console.log('host ',hosts)
+        if(error){
+          return cb(error)
+        }else{
+          return cb(null,hosts)
+        }
+      })
+    });
