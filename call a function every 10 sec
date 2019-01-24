@@ -1,0 +1,2 @@
+Observable.interval(10000).takeWhile(() => true).subscribe(() => this.function());
+
