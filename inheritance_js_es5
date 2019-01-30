@@ -1,0 +1,23 @@
+var BaseClass = function(data){
+    console.log(this instanceof BaseClass) //this is an instance of BaseClass
+    console.log(this instanceof Function) //this is not a function
+    console.log(this.name) //this has no name yet
+
+    Object.assign(this,data)
+}
+
+var ExtendedClass = function(){
+    BaseClass.apply(this,arguments)
+}
+
+/*no*/
+ExtendedClass.prototype = Object.create(BaseClass) 
+//doing so means prototype of ExtendedClass becomes constructor function
+
+ExtendedClass.prototype = Object.create(BaseClass.prototype)
+ExtendedClass.prototype.constructor = ExtendedClass //constructor of ExtendedClass
+
+var instance = new ExtendedClass({name:'foo'})
+console.log(instance.name); //foo
+console.log(BaseClass.name); //BaseClass
+console.log(ExtendedClass.name); //ExtendedClass
