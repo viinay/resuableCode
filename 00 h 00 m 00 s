@@ -1,0 +1,26 @@
+hmsFormatting(seconds){
+    let date_today:any = new Date(null)
+    let date:any = new Date(null);
+    date.setSeconds(seconds); // specify value for SECONDS here
+    let oldformat = date.toISOString().substr(11, 8)
+    let diffInMilli = (date - date_today)
+    let diffInHr = diffInMilli/3.6e+6;
+
+    let time = ''
+    if(oldformat.substring(0,2) !== '00' || diffInHr >24){
+      time += (parseInt(oldformat.substring(0,2))+parseInt(diffInHr+'')) + 'h '
+    }else if(oldformat.substring(0,2) !== '00'){
+      time += oldformat.substring(0,2) + 'h '
+    }
+
+    if(oldformat.substring(3,5) !== '00'){
+        time += oldformat.substring(3,5) + 'm '
+    }
+
+    if(oldformat.substring(6,8) !== '00'){
+        time += oldformat.substring(6,8) + 's'
+    }
+    if(time == '') time  = '0s'
+
+    return time
+  }
