@@ -26,3 +26,12 @@ db.getCollection('banner').find({campaignId:{$ne:null}}).forEach(function(banner
         db.getCollection('campaign').remove({_id:campaign._id})
     })
 })
+
+
+#4
+//db.getCollection('publisher').find({})
+//var p = db.getCollection('publisher').find({}).toArray()
+p.forEach((publisher,index)=>{
+        print(index)
+    db.getCollection('publisher').update({_id:publisher._id},{$set:{sr_no:NumberInt(index+1)}})
+})
