@@ -13,7 +13,19 @@
 import pandas as pd
 import hashlib
 import json
-
+import datetime as datetime
+def time_to_seconds(time_string):
+    """Helper to convert strings 'hh:mm:ss' to integer seconds"""
+    parts = time_string.split(':')
+    s = int(parts[-1])
+    m = int(parts[-2])
+    if len(parts) == 2:
+        h = 0
+    else:
+        h = int(parts[-3])
+    time_obj = datetime.timedelta(hours=h, minutes=m, seconds=s)
+    return int(time_obj.total_seconds())
+    
 videoproductsDF = pd.read_csv('videoproducts.csv')
 videoproductsDF.dropna(axis = 1, how ='all')
 videoproducts = []
@@ -24,13 +36,14 @@ for index,row in videoproductsDF.iterrows():
             'products':[]
         }
         # video['link']
-        video['title'] = row['Video link'] or videoproductsDF[index-1]['Video link']
+        video['title'] = row['Video link']
         # video['postId'] = hashlib.md5(row['link'])
-        video['start'] = row['start time']
-        video['end'] = row['end time']
+        video['start'] = time_to_seconds(row['start time'])
+        video['end'] = time_to_seconds(row['end time'])
         for key,value in row.iteritems():
             if key.startswith('product link'):
-                video['products'].append({'link':value})
+                if value == value:
+                    video['products'].append({'link':value})
         videoproducts.append(video)
 
 print(videoproducts)
