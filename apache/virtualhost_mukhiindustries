@@ -1,0 +1,13 @@
+[program:mukhiindustries]
+command=/usr/bin/node /var/www/mukhiind/server.js
+directory=/var/www/mukhiind
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/mukhiindustries.err.log
+stdout_logfile=/var/log/mukhiindustries.out.log
+
+
+sudo supervisorctl reread
+sudo supervisorctl reload
+
+
