@@ -1,3 +1,6 @@
 git pull origin branchname --allow-unrelated-histories
 
 #--allow-unrelated-histories when you have diff remote and local repo structure
+
+# to activate particular ssh key
+ssh-add /path/to/key.pub 
